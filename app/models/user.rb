@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   validates :name, :email, presence: true, uniqueness: true
   validates :email, format: {with: /(\A[a-z]+\@vinsol\.[a-z]{2,3}\Z)/i}
   has_secure_password
+
+  has_many :orders
   after_destroy :ensure_an_admin_remains
   before_destroy :check_for_admin
   before_update :check_for_admin

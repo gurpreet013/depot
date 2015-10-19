@@ -1,6 +1,6 @@
 class Cart < ActiveRecord::Base
   has_many :line_items, dependent: :destroy
-  has_many :products, through: :line_items, -> {where(enabled:true)}
+  has_many :products, ->{where(enabled:true)}, through: :line_items
 
 
 
