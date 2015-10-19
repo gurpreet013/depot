@@ -1,5 +1,8 @@
 class Cart < ActiveRecord::Base
   has_many :line_items, dependent: :destroy
+  has_many :products, through: :line_items, -> {where(enabled:true)}
+
+
 
   def add_product(product_id, price)
     current_item = line_items.find_by(product_id: product_id)
