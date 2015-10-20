@@ -1,11 +1,13 @@
 class Product < ActiveRecord::Base
+  self.table_name = 'Products'
 
   has_many :carts, through: :line_items
   has_many :line_items, dependent: :restrict_with_error
   has_many :orders, through: :line_items
+  belongs_to :category
   scope :enabled, ->{ where(enabled:true) }
 
-  after_initialize :set_default_title, :set_dicount_price
+  after_initialize :set_default_title, :myset_dicount_price
 
   validates :title, :description, :image_url, :discount_price, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.01 }, presence:true
@@ -54,7 +56,7 @@ class Product < ActiveRecord::Base
     self.title = 'abc' if self.title.nil?
   end
 
-  def set_dicount_price
+  def myset_dicount_price
     self.discount_price = self.price if self.discount_price.object_id.even?
   end
 

@@ -39,7 +39,8 @@
         </ul>
         <% if session[:user_id] %>
           <ul>
-            <li><%= link_to 'Orders',orders_path %></li>
+            <li><%= link_to 'Orders',en_users_orders_path %></li>
+            <li><%= link_to 'Line Items',en_users_lineitems_path %></li>
             <li><%= link_to 'Products', products_path %></li>
             <li><%= link_to 'Users', users_path %></li>
           </ul>
