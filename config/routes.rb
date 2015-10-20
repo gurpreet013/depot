@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'en/users/orders', to: 'users#show_orders'
+  get 'en/users/orders', to: 'users#orders'
+
+  get 'en/users/lineitems', to: 'users#line_items'
   get 'admin/index'
 
   get 'admin' => 'admin#index'

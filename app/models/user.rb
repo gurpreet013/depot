@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :orders
+  has_many :line_items, through: :orders
   after_destroy :ensure_an_admin_remains
   before_destroy :check_for_admin
   before_update :check_for_admin

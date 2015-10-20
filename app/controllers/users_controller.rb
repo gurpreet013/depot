@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :show_orders]
-  before_action :get_user_from_session, only: :show_orders
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :get_user_from_session, only: [:orders, :line_items]
   def new
     @user = User.new
   end
@@ -56,8 +56,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def show_orders
+  def orders
     @orders = @user.orders
+  end
+
+  def line_items
+    @line_items = @user.line_items.includes(:product)
   end
 
   private
