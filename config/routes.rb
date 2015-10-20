@@ -29,11 +29,11 @@ Rails.application.routes.draw do
   end
   # get 'store/index'
   resources :users
-  resources :users do
-    collection do
-      get 'orders', to:'show_orders'
-    end
-  end
+  # resources :users do
+  #   collection do
+  #     get 'orders', to:'show_orders'
+  #   end
+  # end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -19,20 +19,18 @@ class OrdersController < ApplicationController
   def create
     debugger
     @order = Order.new(order_params)
+    @order.total = @cart.total_price
     @order.add_line_items_from_cart(@cart)
     respond_to do |format|
       if @order.save
         Cart.destroy(session[:cart_id])
         OrderNotifier.received(@order).deliver
         session[:cart_id] = nil
-        format.html { redirect_to store_url, notice:
-          I18n.t('.thanks') }
-        format.json { render action: 'show', status: :created,
-        location: @order }
+        format.html { redirect_to store_url, notice: I18n.t('.thanks') }
+        format.json { render action: 'show', status: :created, location: @order }
       else
         format.html { render action: 'new' }
-        format.json { render json: @order.errors,
-        status: :unprocessable_entity }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
   end
