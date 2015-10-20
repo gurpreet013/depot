@@ -17,6 +17,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    debugger
     @order = Order.new(order_params)
     @order.add_line_items_from_cart(@cart)
     respond_to do |format|
@@ -39,7 +40,7 @@ class OrdersController < ApplicationController
 private
 
   def order_params
-    params.require(:order).permit(:name, :address, :email, :pay_type)
+    params.require(:order).permit(:name, :address, :email, :pay_type, :user_id)
   end
 
 end

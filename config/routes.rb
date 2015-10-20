@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'en/users/orders', to: 'users#show_orders'
   get 'admin/index'
 
   get 'admin' => 'admin#index'
@@ -26,8 +27,14 @@ Rails.application.routes.draw do
     root 'store#index', as: 'store', via: :all
     resources :users
   end
-  get 'store/index'
+  # get 'store/index'
   resources :users
+  resources :users do
+    collection do
+      get 'orders', to:'show_orders'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

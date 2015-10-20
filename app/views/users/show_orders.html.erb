@@ -1,0 +1,24 @@
+<h2>Your Orders</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Email</th>
+      <th>Pay Type</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%=order.name %></td>
+      <td><%=order.address %></td>
+      <td><%=order.email %></td>
+      <td><%=order.pay_type %></td>
+    </tr>
+  <% end%>
+  <tbody>
+
+</table>
+

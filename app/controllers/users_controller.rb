@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :show_orders]
+  before_action :get_user_from_session, only: :show_orders
   def new
     @user = User.new
   end
@@ -56,6 +56,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_orders
+    @orders = @user.orders
+  end
+
   private
 
     def set_user
@@ -64,6 +68,10 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :old_pass)
+    end
+
+    def get_user_from_session
+      @user = User.find_by(id: session[:user_id])
     end
 
 end
