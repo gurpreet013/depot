@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020140351) do
+ActiveRecord::Schema.define(version: 20151021074352) do
 
   create_table "Products", force: :cascade do |t|
     t.string   "title"
@@ -24,7 +24,10 @@ ActiveRecord::Schema.define(version: 20151020140351) do
     t.integer  "line_items_count",                         default: 0,    null: false
     t.decimal  "discount_price"
     t.string   "permalink"
+    t.integer  "category_id"
   end
+
+  add_index "Products", ["category_id"], name: "index_products_on_category_id"
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false

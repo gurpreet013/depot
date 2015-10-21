@@ -5,6 +5,14 @@ class Category < ActiveRecord::Base
   validates :title, presence: true
   validates :title, uniqueness:{ scope: [:parent_id, :title] }, if: "!title.nil?"
   validate :one_level_nesting
+  before_destroy :valid?
+
+
+  def valid?
+    if products.size !=0
+      return false
+    end
+  end
 
   def one_level_nesting
     if self.class.exists? parent && self.class.exists?(parent.parent)
